@@ -20,3 +20,12 @@ def grdl(task) {
     println "gradlew ${task}"
     sh "./gradlew ${task}"
 }
+
+def checkout(repo) {
+    checkout(repo, BRANCH_NAME)
+}
+
+def checkout(repo, branch) {
+    //git branch: branch, url: repo
+    git branch: 'master', credentialsId: '12345-1234-4696-af25-123455', url: 'ssh://git@bitbucket.org:company/repo.git'
+}
