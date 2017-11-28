@@ -3,8 +3,8 @@ BRANCH_NAME = "${env.BRANCH_NAME}"
 node {
     stage('Build') {
         echo 'Building..'
-        cleanup()
-        git credentialsId: 'c6255d12-883c-4aee-ae6a-836802a28780', url: 'https://github.com/TimothyVandenbrande/devopscourselab3.git'
+        sh "rm -rf *"
+        checkout scm
         grdl('build')
     }
     stage('Test') {
@@ -12,8 +12,16 @@ node {
     }
 }
 
-def cleanup() {
-  sh "rm -rf *"
+def cleanWorkspace() {
+    sh "rm -rf *"
+}
+
+def checkout(repo) {
+    checkout(repo, BRANCH_NAME)
+}
+
+def checkout(repo, branch) {
+    git branch: branch, url: repo
 }
 
 def grdl(task) {
