@@ -5,6 +5,9 @@ node {
    stage('Another stage!') {
        echo 'Hello'
    }
+   stage('Never enough stages') {
+       echo 'Hello'
+   }
    stage('Proceed?') {
        input "Deploy?"
        milestone()
