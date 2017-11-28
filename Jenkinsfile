@@ -1,18 +1,30 @@
+BRANCH_NAME = "${env.BRANCH_NAME}"
+
 node {
-   stage('This is a stage') {
-       echo 'Hello'
-   }
-   stage('Another stage!') {
-       echo 'Hello'
-   }
-   stage('Never enough stages') {
-       echo 'Hello'
-   }
-   stage('Proceed?') {
-       input "Deploy?"
-       milestone()
-   }
-   stage('Finished') {
-       echo 'Hello'
-   }
+    stage('Build') {
+        echo 'Building..'
+        cleanWorkspace()
+        checkout scm
+        grdl('build')
+    }
+    stage('Test')
+        grdl('test')
+    }
+}
+
+def cleanWorkspace() {
+    sh "rm -rf *"
+}
+
+def checkout(repo) {
+    checkout(repo, BRANCH_NAME)
+}
+
+def checkout(repo, branch) {
+    git branch: branch, url: repo
+}
+
+def grdl(task) {
+    println "gradlew ${task}"
+    sh "./gradlew ${task}"
 }
