@@ -7,7 +7,7 @@ node {
         checkout scm
         grdl('build')
     }
-    stage('Test')
+    stage('Test') {
         grdl('test')
     }
 }
