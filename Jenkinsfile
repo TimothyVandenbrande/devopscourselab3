@@ -26,6 +26,5 @@ def checkout(repo) {
 }
 
 def checkout(repo, branch) {
-    //git branch: branch, url: repo
-    git branch: 'master', credentialsId: '12345-1234-4696-af25-123455', url: 'ssh://git@bitbucket.org:company/repo.git'
+    git branch: BRANCH_NAME, credentialsId: 'c6255d12-883c-4aee-ae6a-836802a28780', url: 'https://github.com/TimothyVandenbrande/devopscourselab3.git'
 }
